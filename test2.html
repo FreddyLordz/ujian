@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian</title>
+    <style>
+        tr,td,table{
+            border:1px black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Ujian Mading</h1>
+        <br>
+        <br>
+        UserID &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; <input type="text" id="UserID"/>
+        <br>
+        <br>
+        Password &nbsp;:&nbsp; <input type="password" id="password"/>
+        <br>
+        <br>
+        <button onclick="Login1()">login</button>
+        <br>
+        <br>
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <td>No.</td>
+                    <td>Kegiatan</td>
+                    <td>Hari</td>
+                    <td>Gambar</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+        <tbody id='body'>
+
+        </tbody>
+        <tfoot id='foot'>
+
+        </tfoot>
+    </table>
+    </center>
+    <script>
+        class One{
+            constructor(a,b,c){
+                this.nama=a, this.katasandi=b, this.role=c
+            }
+        }
+        class More{
+            constructor(a,b,c){
+                this.item=a, this.day=b, this.pict=c
+            }
+        }
+        var data1=[
+            new One('admin', 00000, 'administrator'),
+            new One('jek', 12345, '')
+        ]
+        var data2=[
+            new More('makan','Senin', 'makan.jpg'),
+            new More('tidur','Selasa', 'tidur.jpg')
+        ]
+        var X={}
+
+        const Login1=()=>{
+            var user=document.getElementById('uname').value
+            var pass=document.getElementById('pass').value
+            var login=false
+            for(let i=0;i<data1;i++){
+                if(user==data1[i].nama&&pass==data1){
+                    login=true
+                    X=data1[i]
+                }
+            }
+            if(login){
+                if(X.role=='admin'){
+                    document.getElementById('body').innerHTML=
+                    `<tbody>
+                    </tbody>`
+                    document.getElementById('foot').innerHTML=
+                    `<tfoot>
+                        <tr>
+                            <td>
+                            </td>
+                            <td><input type='text' class='additem'/></td>
+                            <td>
+                                <select class='additem'>
+                                    <option>Senin</option>
+                                    <option>Selasa</option>
+                                    <option>Rabu</option>
+                                    <option>Kamis</option>
+                                    <option>Jumat</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type='text' class='additem'>
+                            </td>
+                            <td>
+                                <button onclick='onAddItemClick()'>ADD</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>`
+                    document.getElementsByTagName('d3')[0].innerHTML=`${X.role}`
+                    document.getElementsByTagName('U')[0].innerHTML=`<button onclick=logout()'>logout</button>`
+
+                    printData(data2)
+                }else{
+                    document.getElementById('body').innerHTML=
+                    `<tbody>
+                    </tbody>`
+                    document.getElementsByTagName('d3')[0].innerHTML=`${X.nama}`
+                    document.getElementsByTagName('U')[0].innerHTML=`<button onclick=logout()'>logout</button>`
+
+                    printData(data2)
+                }
+            }else{
+                document.getElementsByTagName('d3')[0].innerHTML=`user tidak dapat ditemukan`
+            }
+        }
+        
+        const printItem=(a)=>{
+            var output=''
+            a.forEach((val, index) => {
+                output +=
+                `<tr>
+                    <td>${index+1}</td>
+                    <td>${val.item}</td>
+                    <td>${val.hari}</td>
+                    <td>${val.gambar}</td>
+                    <td></td>
+                </tr>`
+            });
+            document.getElementsByTagName('tbody')[0].innerHTML=output
+        }
+
+    var iedit=-1
+    var idelete=-2
+    const printData=(a)=>{
+        var output=''
+        a.forEach((val,index))=>{
+            if(index==iedit){
+            output+=`<tr>
+                        <td>
+                        ${index+1}
+                        </td>
+                        <td>
+                        <input type='text' id='edititem${index}'>
+                        </td>
+                        <td>
+                            <select id='edithari${index}'>
+                                <option>Senin</option>
+                                <option>Selasa</option>
+                                <option>Rabu</option>
+                                <option>Kamis</option>
+                                <option>Jumat</option>
+                            </select>
+                        </td>
+                        <td>
+                        <input type='text' id='editimg${index}'>
+                        </td>
+                        <td>
+                        <button onclick='cancel()'>cancel</button><button onclick='save(${index})'>save</button></td>    
+                        </td>
+                        </tr>`
+        }else if(index==idelete){
+            output+=`<tr>
+                        <td>
+                        ${index+1}
+                        </td>
+                        <td>
+                        ${val.item}
+                        </td>
+                        <td>
+                        ${val.hari}
+                        </td>
+                        <td>
+                        ${val.gambar}
+                        </td>
+                        <td>
+                        <button onclick='canceldelete()'>No</button><button onclick=confirmDel(${index})'><Yes</button></td>
+                        </td>
+                    </tr>`
+        }else{
+            output+=`<tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+        }
+    }
+
+            
+
+
+
+
+    </script>
+</body>
+</html>
